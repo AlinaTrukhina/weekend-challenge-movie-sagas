@@ -10,6 +10,10 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
+
+
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -32,6 +36,7 @@ function* fetchAllMovies() {
 }
 
 function* getActiveMovie(action) {
+
     // get request for the database to get one movie to display
     try {
         const activeMovie = yield axios.get(
@@ -58,6 +63,8 @@ function* getActiveMovie(action) {
             type: 'SET_ACTIVE_MOVIE',
             payload: activeMovieWithGenres, 
         })
+
+        history.push(`/details/${activeMovie.id}`)
     }
     catch (error) {
         console.error('get active movie error', error);

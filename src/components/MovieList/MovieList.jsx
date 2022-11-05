@@ -19,7 +19,7 @@ function MovieList() {
             type: 'GET_ACTIVE_MOVIE',
             payload: movie
         });
-    ;
+        history.push(`/details/${movie.id}`)
     }
 
     return (
