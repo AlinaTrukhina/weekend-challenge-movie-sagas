@@ -29,6 +29,7 @@ router.get('/:id', (req, res) => {
   ; `;
   pool.query(sqlText, sqlParam)
   .then(dbResponse => {
+
     res.send(dbResponse.rows);
   })
   .catch(error => {

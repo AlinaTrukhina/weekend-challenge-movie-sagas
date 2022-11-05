@@ -35,20 +35,20 @@ function* getActiveMovie(action) {
     // get request for the database to get one movie to display
     try {
         const activeMovie = yield axios.get(
-            '/api/movie/', {
-                params: action.payload.id
-            }
+            `/api/movie/${action.payload.id}`
         );
         console.log('getting selected movie', action.payload.id);
+    
+            console.log('get movie response from db', activeMovie);
+        yield put({
+            type: 'SET_ACTIVE_MOVIE',
+            payload: activeMovie.data
+        })
     }
     catch (error) {
         console.error('get active movie error', error);
     }
 
-    // yield put({
-    //     type: 'SET_ACTIVE_MOVIE',
-        
-    // })
 }
 
 // Create sagaMiddleware
@@ -75,7 +75,14 @@ const genres = (state = [], action) => {
     }
 }
 
-
+const activeMovie = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_ACTIVE_MOVIE':
+            return action.payload;
+        default: 
+            return state;
+    }
+}
 
 // end reducer section
 
@@ -84,6 +91,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        activeMovie
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
