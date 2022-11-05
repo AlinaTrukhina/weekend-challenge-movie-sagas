@@ -37,12 +37,26 @@ function* getActiveMovie(action) {
         const activeMovie = yield axios.get(
             `/api/movie/${action.payload.id}`
         );
-        console.log('getting selected movie', action.payload.id);
-    
-            console.log('get movie response from db', activeMovie);
+        //console.log('getting selected movie', action.payload.id);
+
+        const activeMovieWithGenres = {
+            id: activeMovie.data[0].id,
+            title: activeMovie.data[0].title,
+            poster: activeMovie.data[0].poster,
+            genres: {
+            }
+        }
+        activeMovieWithGenres.genres = activeMovie.data.map(item => {
+            return {
+                genre: item.name
+                }
+        });
+
+        console.log('activeMovieGenres', activeMovieWithGenres);
+        console.log('get movie response from db', activeMovie);
         yield put({
             type: 'SET_ACTIVE_MOVIE',
-            payload: activeMovie.data
+            payload: activeMovieWithGenres, 
         })
     }
     catch (error) {
