@@ -16,6 +16,26 @@ router.get('/', (req, res) => {
 
 });
 
+// router to get details for one selected movie
+router.get('/:id', (req, res) => {
+  sqlParam = [req.params.id];
+  const sqlText = `SELECT movies.id, movies.title, movies.poster, movies.description, genres.name
+                FROM movies
+                JOIN movies_genres 
+                  ON movies_genres.movie_id = movies.id
+                JOIN genres
+                  ON movies_genres.genre_id = genres.id
+                WHERE movies.id = $1
+  ; `;
+  pool.query(sqlText, sqlParam)
+  .then(dbResponse => {
+    res.send(dbResponse.rows);
+  })
+  .catch(error => {
+    console.error('error in GET selected movie', error);
+    res.sendStatus(500);
+  })
+})
 
 // router to add movie to database
 router.post('/', (req, res) => {

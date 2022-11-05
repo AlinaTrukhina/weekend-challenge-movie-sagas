@@ -14,6 +14,9 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+
+    // get active movie for movie details page
+    yield takeEvery('GET_ACTIVE_MOVIE', getActiveMovie);
 }
 
 function* fetchAllMovies() {
@@ -25,8 +28,27 @@ function* fetchAllMovies() {
 
     } catch {
         console.log('get all error');
+    }       
+}
+
+function* getActiveMovie(action) {
+    // get request for the database to get one movie to display
+    try {
+        const activeMovie = yield axios.get(
+            '/api/movie/', {
+                params: action.payload.id
+            }
+        );
+        console.log('getting selected movie', action.payload.id);
     }
+    catch (error) {
+        console.error('get active movie error', error);
+    }
+
+    // yield put({
+    //     type: 'SET_ACTIVE_MOVIE',
         
+    // })
 }
 
 // Create sagaMiddleware
