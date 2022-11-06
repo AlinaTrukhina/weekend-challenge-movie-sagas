@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
+import Button from '@mui/material/Button';
+
 function DetailsPage() {
     
     const history = useHistory();
@@ -29,12 +31,14 @@ function DetailsPage() {
             <h1>{activeMovie && activeMovie.title}</h1>
             <img src={activeMovie && activeMovie.poster} />
             <ul>
-                {activeMovie && activeMovie.genres.map(x => 
+                {activeMovie.genres && activeMovie.genres.map(x => 
                   <li key={x.genre}>{x.genre}</li>
                 )}
-                </ul> 
+            </ul> 
             <p>{activeMovie && activeMovie.description}</p>
-            <button onClick={handleBack}>Back to Movies List</button>
+            <Button variant="outlined" onClick={handleBack}>
+                Back to Movies List
+            </Button>
         </>
     );
 }

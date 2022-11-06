@@ -19,6 +19,12 @@ function* rootSaga() {
 
     // get active movie for movie details page
     yield takeEvery('GET_ACTIVE_MOVIE', getActiveMovie);
+
+    // get all genres from the database
+    yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres);
+
+    // add movie to the database
+    // yield takeEvery('ADD_MOVIE', addMovie);
 }
 
 function* fetchAllMovies() {
@@ -31,6 +37,18 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }       
+}
+
+// generator function called on 'FETCH_ALL_GENRES'
+function* fetchAllGenres() {
+    try {
+        const genres = yield axios.get('/api/genre');
+        console.log('getting genres')
+        yield put({ type: 'SET_GENRES', payload: genres.data })
+    }
+    catch (error) {
+        console.error('error fetching genres', error);
+    }
 }
 
 function* getActiveMovie(action) {
@@ -65,6 +83,19 @@ function* getActiveMovie(action) {
     }
     catch (error) {
         console.error('set active movie error', error);
+    }
+}
+
+// generator function called on 'FETCH_ALL_GENRES'
+function* addMovie(action) {
+    console.log('adding movie', action.payload);
+    try {
+        yield axios.post('/api/movie', action.payload);
+        console.log('adding movie')
+
+    }
+    catch (error) {
+        console.error('error adding movie', error);
     }
 }
 
