@@ -35,7 +35,9 @@ function MovieList() {
                     );
                 })}
             </section>
+            
         </main>
+        
 
     );
 }

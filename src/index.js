@@ -56,19 +56,18 @@ function* getActiveMovie(action) {
             return {
                 genre: item.name
                 }
-        });
+        })
 
         console.log('activeMovieWithGenres', activeMovieWithGenres);
         console.log('get movie response from db', activeMovie);
         yield put({
             type: 'SET_ACTIVE_MOVIE',
             payload: activeMovieWithGenres, 
-        })
+        });
 
-        // history.push(`/details/${activeMovie.id}`)
     }
     catch (error) {
-        console.error('get active movie error', error);
+        console.error('set active movie error', error);
     }
 
 }
