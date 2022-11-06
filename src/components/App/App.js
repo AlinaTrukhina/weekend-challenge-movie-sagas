@@ -4,6 +4,8 @@ import MovieList from '../MovieList/MovieList';
 import MovieForm from '../MovieForm/MovieForm';
 import DetailsPage from '../DetailsPage/DetailsPage';
 
+
+
 function App() {
   return (
     <div className="App">
@@ -17,9 +19,9 @@ function App() {
           <DetailsPage />
         </Route> 
 
-        <Route path='/addmovie'>
+        {/* <Route path='/addmovie'>
           <MovieForm />
-        </Route>
+        </Route> */}
       </Router>
     </div>
   );

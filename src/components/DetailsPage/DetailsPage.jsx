@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
+import Button from '@mui/material/Button';
+
 function DetailsPage() {
     
     const history = useHistory();
@@ -34,7 +36,9 @@ function DetailsPage() {
                 )}
             </ul> 
             <p>{activeMovie && activeMovie.description}</p>
-            <button onClick={handleBack}>Back to Movies List</button>
+            <Button variant="outlined" onClick={handleBack}>
+                Back to Movies List
+            </Button>
         </>
     );
 }

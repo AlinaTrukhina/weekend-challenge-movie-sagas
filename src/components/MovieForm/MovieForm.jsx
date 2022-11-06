@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
+
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
-
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 // Material UI properties for the form element
 const ITEM_HEIGHT = 48;
@@ -30,13 +32,15 @@ function MovieForm() {
     // Material UI theme
     const theme = useTheme();
 
+    // react/redux declarations
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // set variabales to use state or store
     const [newMovieTitle, setNewMovieTitle] = useState('');
     const [newMoviePoster, setNewMoviePoster] = useState('');
     const [newMovieDesc, setNewMovieDesc] = useState('');
-    const [genreName, setGenreName] = useState([]);
+    const [genreNames, setGenreNames] = useState([]);
     const genres = useSelector(store => store.genres);
 
     // fetch genres on page load
@@ -44,16 +48,36 @@ function MovieForm() {
         dispatch({ type: 'FETCH_ALL_GENRES' });
     }, []);
 
+    // add movie
+    const addMovie = (genres) => {
+
+        const createdMovie = {
+            title: newMovieTitle,
+            poster: newMoviePoster,
+            description: newMovieDesc,
+            newMovieGenres: genreNames
+        }
+        console.log('created movie', createdMovie);
+        dispatch({
+            type: 'ADD_MOVIE',
+            payload: createdMovie
+        })
+    }
+
     // set movie genre on change
     const handleGenreChange = (event) => {
         const {
         target: { value },
         } = event;
-        setGenreName(
+        setGenreNames(
         // On autofill we get a stringified value.
         typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+    const handleCancel = () => {
+        history.push('/');
+    }
 
     const handleTitleChange = (event) => {
         setNewMovieTitle(event.target.value);
@@ -67,10 +91,10 @@ function MovieForm() {
         setNewMovieDesc(event.target.value);
     };
 
-    function getStyles(genre, genreName, theme) {
+    function getStyles(genre, genreNames, theme) {
         return {
         fontWeight:
-            genreName.indexOf(genre) === -1
+            genreNames.indexOf(genre) === -1
             ? theme.typography.fontWeightRegular
             : theme.typography.fontWeightMedium,
         };
@@ -116,7 +140,7 @@ function MovieForm() {
             labelId="genres-label"
             id="multiple-genres"
             multiple
-            value={genreName}
+            value={genreNames}
             onChange={handleGenreChange}
             input={<OutlinedInput id="select-multiple-genres" label="Genres" />}
             renderValue={(selected) => (
@@ -132,13 +156,25 @@ function MovieForm() {
                 <MenuItem
                 key={genre.id}
                 value={genre.name}
-                style={getStyles(genre, genreName, theme)}
+                style={getStyles(genre, genreNames, theme)}
                 >
                 {genre.name}
                 </MenuItem>
             ))}
             </Select>
         </div>
+        <Stack spacing={2} direction="row">
+            <Button 
+                variant="outlined"
+                onClick={handleCancel}
+                >Cancel
+            </Button>
+            <Button 
+                variant="contained"
+                onClick={addMovie}
+                >Save
+            </Button>
+        </Stack>
         </Box>
     );
 }
