@@ -48,6 +48,7 @@ function* getActiveMovie(action) {
             id: activeMovie.data[0].id,
             title: activeMovie.data[0].title,
             poster: activeMovie.data[0].poster,
+            description: activeMovie.data[0].description,
             genres: {
             }
         }
@@ -57,7 +58,7 @@ function* getActiveMovie(action) {
                 }
         });
 
-        console.log('activeMovieGenres', activeMovieWithGenres);
+        console.log('activeMovieWithGenres', activeMovieWithGenres);
         console.log('get movie response from db', activeMovie);
         yield put({
             type: 'SET_ACTIVE_MOVIE',

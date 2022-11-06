@@ -4,18 +4,23 @@ import { useHistory } from "react-router-dom";
 
 function DetailsPage() {
 
-    const movies = useSelector(store => store.activeMovie);
+    const activeMovie = useSelector(store => store.activeMovie);
     const history = useHistory();
 
     const handleBack = () => {
         history.push('/');
     }
 
-
     return (
         <>
-            <h1>Movie Details</h1>
-            {/* <img src={activeMovie.poster} /> */}
+            <h1>{activeMovie.title}</h1>
+            <img src={activeMovie && activeMovie.poster} />
+            <ul>
+                {activeMovie && activeMovie.genres.map(x => 
+                  <li key={x.genre}>{x.genre}</li>
+                )}
+            </ul>
+            <p>{activeMovie.description}</p>
             <button onClick={handleBack}>Back to Movies List</button>
         </>
     );
