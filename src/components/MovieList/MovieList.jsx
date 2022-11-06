@@ -43,8 +43,8 @@ function MovieList() {
         <ThemeProvider theme={theme}>
 
         </ThemeProvider>
-        <main>
-            <h1>MovieList</h1>
+
+            {/* <h1>MovieList</h1>
             <section className="movies">
                 {movies.map(movie => {
                     return (
@@ -55,10 +55,20 @@ function MovieList() {
                         </div>
                     );
                 })}
-            </section>
-            
-        </main>
+            </section> */}
+
         <main>
+        <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h3"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Movies List
+            </Typography>
+        </Container>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
@@ -69,10 +79,6 @@ function MovieList() {
                 >
                   <CardMedia
                     component="img"
-                    sx={{
-                      // 16:9
-                      pt: '40%',
-                    }}
                     image={movie.poster}
                     alt={movie.title}
                     onClick={(evt)=>goToDetails(evt, movie)} 
@@ -82,8 +88,6 @@ function MovieList() {
                       {movie.title}
                     </Typography>
                     {/* <Typography>
-                      This is a media card. You can use this section to describe the
-                      content.
                     </Typography> */}
                   </CardContent>
                   <CardActions>

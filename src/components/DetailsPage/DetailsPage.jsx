@@ -4,6 +4,14 @@ import { useHistory } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import { width } from '@mui/system';
 
 function DetailsPage() {
     
@@ -28,17 +36,30 @@ function DetailsPage() {
 
     return (
         <>
-            <h1>{activeMovie && activeMovie.title}</h1>
-            <img src={activeMovie && activeMovie.poster} />
-            <ul>
-                {activeMovie.genres && activeMovie.genres.map(x => 
-                  <li key={x.genre}>{x.genre}</li>
-                )}
-            </ul> 
-            <p>{activeMovie && activeMovie.description}</p>
-            <Button variant="outlined" onClick={handleBack}>
-                Back to Movies List
-            </Button>
+        <Card sx={{ m: 1, maxwidth: 500 }} >
+            <CardHeader
+            title={activeMovie && activeMovie.title}
+            />
+            <CardMedia
+                sx={{height: '50%', width: '50%', margin: 'auto' }}
+                component="img"               
+                image={activeMovie && activeMovie.poster}
+                alt={activeMovie && activeMovie.title}
+            />
+            <CardContent>
+                <List>
+                    {activeMovie.genres && activeMovie.genres.map(x => 
+                    <ListItem key={x.genre}>{x.genre}</ListItem>
+                    )}
+                </List> 
+                <Typography variant="body2" color="text.secondary">
+                {activeMovie && activeMovie.description}
+                </Typography>
+            </CardContent>
+        </Card>
+        <Button variant="outlined" onClick={handleBack}>
+            Back to Movies List
+        </Button>
         </>
     );
 }
