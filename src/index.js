@@ -64,7 +64,7 @@ function* getActiveMovie(action) {
             payload: activeMovieWithGenres, 
         })
 
-        history.push(`/details/${activeMovie.id}`)
+        // history.push(`/details/${activeMovie.id}`)
     }
     catch (error) {
         console.error('get active movie error', error);
