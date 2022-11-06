@@ -29,10 +29,10 @@ function DetailsPage() {
             <h1>{activeMovie && activeMovie.title}</h1>
             <img src={activeMovie && activeMovie.poster} />
             <ul>
-                {activeMovie && activeMovie.genres.map(x => 
+                {activeMovie.genres && activeMovie.genres.map(x => 
                   <li key={x.genre}>{x.genre}</li>
                 )}
-                </ul> 
+            </ul> 
             <p>{activeMovie && activeMovie.description}</p>
             <button onClick={handleBack}>Back to Movies List</button>
         </>
