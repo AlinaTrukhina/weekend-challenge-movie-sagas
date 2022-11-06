@@ -15,11 +15,8 @@ function MovieList() {
 
     const goToDetails = (evt, movie) => {
         evt.preventDefault(evt);
-        dispatch({
-            type: 'GET_ACTIVE_MOVIE',
-            payload: movie
-        });
-        history.push(`/details/`)
+
+        history.push(`/details/${movie.id}`)
     }
 
     return (

@@ -10,8 +10,6 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
-
 
 
 
@@ -36,11 +34,11 @@ function* fetchAllMovies() {
 }
 
 function* getActiveMovie(action) {
-
     // get request for the database to get one movie to display
     try {
+        console.log(action.payload);
         const activeMovie = yield axios.get(
-            `/api/movie/${action.payload.id}`
+            `/api/movie/${action.payload}`
         );
         //console.log('getting selected movie', action.payload.id);
 
@@ -64,12 +62,10 @@ function* getActiveMovie(action) {
             type: 'SET_ACTIVE_MOVIE',
             payload: activeMovieWithGenres, 
         });
-
     }
     catch (error) {
         console.error('set active movie error', error);
     }
-
 }
 
 // Create sagaMiddleware
@@ -96,7 +92,7 @@ const genres = (state = [], action) => {
     }
 }
 
-const activeMovie = (state = [], action) => {
+const activeMovie = (state = {}, action) => {
     switch (action.type) {
         case 'SET_ACTIVE_MOVIE':
             return action.payload;
@@ -104,7 +100,6 @@ const activeMovie = (state = [], action) => {
             return state;
     }
 }
-
 // end reducer section
 
 // Create one store that all components can use
