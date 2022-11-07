@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { useHistory } from "react-router-dom";
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -16,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 function MovieList() {
 
@@ -34,7 +34,9 @@ function MovieList() {
         history.push(`/details/${movie.id}`)
     }
 
-    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const handleCreateMovie = () => {
+      history.push('/addmovie');
+    }
 
     const theme = createTheme();
 
@@ -68,6 +70,9 @@ function MovieList() {
             >
               Movies List
             </Typography>
+          <Button onClick={handleCreateMovie}>
+            Add Movie
+          </Button>
         </Container>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
@@ -91,7 +96,9 @@ function MovieList() {
                     </Typography> */}
                   </CardContent>
                   <CardActions>
-
+                    <Button onClick={(evt)=>goToDetails(evt, movie)}>
+                      Details
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>

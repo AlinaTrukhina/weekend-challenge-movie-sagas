@@ -12,7 +12,6 @@ import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
@@ -24,7 +23,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres);
 
     // add movie to the database
-    // yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('ADD_MOVIE', addMovie);
 }
 
 function* fetchAllMovies() {

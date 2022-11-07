@@ -13,6 +13,7 @@ import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 // Material UI properties for the form element
 const ITEM_HEIGHT = 48;
@@ -49,20 +50,32 @@ function MovieForm() {
     }, []);
 
     // add movie
-    const addMovie = (genres) => {
+    const addMovie = (evt) => {
+        evt.preventDefault();
+        function getGenreIds(){
+            let newMovieGenres = [];
+            for (let i=0; i<genres.length; i++){
+                for (let j=0; j<genreNames.length; j++)
+                if (genreNames[j] === genres[i].name){
+                    newMovieGenres.push(genres[i].id);
+                } 
+            }
+            return newMovieGenres;
+        }
 
         const createdMovie = {
             title: newMovieTitle,
             poster: newMoviePoster,
             description: newMovieDesc,
-            newMovieGenres: genreNames
+            genre_id: getGenreIds()
         }
         console.log('created movie', createdMovie);
         dispatch({
             type: 'ADD_MOVIE',
             payload: createdMovie
         })
-    }
+        history.push('/');
+    } 
 
     // set movie genre on change
     const handleGenreChange = (event) => {
@@ -100,12 +113,19 @@ function MovieForm() {
         };
     };
 
-
-
     return (
         <Box
         component="form"
-        sx={{ m: 1, width: 300 }} >
+        sx={{ m: 1, width: '50%', maxHeight: 350 }} >
+            <Typography
+              component="h1"
+              variant="h4"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Add Movie
+            </Typography>
             <div>
             <TextField
             fullWidth
@@ -171,7 +191,7 @@ function MovieForm() {
             </Button>
             <Button 
                 variant="contained"
-                onClick={addMovie}
+                onClick={(evt)=>addMovie(evt)}
                 >Save
             </Button>
         </Stack>

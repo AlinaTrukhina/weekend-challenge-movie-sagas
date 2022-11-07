@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
+const format = require('pg-format');
 
+// router to get all movies from database
 router.get('/', (req, res) => {
 
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
@@ -53,20 +55,29 @@ router.post('/', (req, res) => {
     
     const createdMovieId = result.rows[0].id
 
+// use pg-format to insert multiple rows; SQL identifiers and literals are escaped to help prevent SQL injection. 
+    // create nested array with movie_id and genre_id as values
+    const nestedArray = req.body.genre_id.map(item => [createdMovieId, item]);
+    console.log(nestedArray);
+
+    // use pg-format to format the array into sql query text
+    const insertMultipleGenresQuery = format(`
+      INSERT INTO "movies_genres" ("movie_id", "genre_id") 
+      VALUES %L`, nestedArray);
     // Now handle the genre reference
-    const insertMovieGenreQuery = `
-      INSERT INTO "movies_genres" ("movie_id", "genre_id")
-      VALUES  ($1, $2);
-      `
+    // const insertMovieGenreQuery = `
+    //   INSERT INTO "movies_genres" ("movie_id", "genre_id")
+    //   VALUES  ($1, $2);
+    //   `
       // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-      pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id])
+      pool.query(insertMultipleGenresQuery)
       .then(result => {
         //Now that both are done, send back success!
         res.sendStatus(201);
       }).catch(err => {
         // catch for second query
         console.log(err);
-        res.sendStatus(500)
+        res.sendStatus(500);
       })
 
 // Catch for first query
