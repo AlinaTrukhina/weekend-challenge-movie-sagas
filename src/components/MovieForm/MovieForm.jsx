@@ -116,7 +116,7 @@ function MovieForm() {
     return (
         <Box
         component="form"
-        sx={{ m: 1, width: '50%', maxHeight: 350 }} >
+        sx={{m: 2, width: '50%', maxHeight: 350, mx: "auto"}} >
             <Typography
               component="h1"
               variant="h4"
@@ -128,6 +128,7 @@ function MovieForm() {
             </Typography>
             <div>
             <TextField
+            margin='dense'
             fullWidth
             required
             id="movieTitleInput"
@@ -136,6 +137,7 @@ function MovieForm() {
             onChange={handleTitleChange}
             />
             <TextField
+            margin='dense'
             fullWidth
             required
             id="moviePosterInput"
@@ -144,6 +146,7 @@ function MovieForm() {
             onChange={handlePosterChange}
             />
             <TextField
+            margin='dense'
             fullWidth
             required
             multiline
@@ -183,7 +186,11 @@ function MovieForm() {
             ))}
             </Select>
         </div>
-        <Stack spacing={2} direction="row">
+        <Stack spacing={4} direction="row"   
+        justifyContent="center"
+        alignItems="center"
+        marginTop='10px'
+        >
             <Button 
                 variant="outlined"
                 onClick={handleCancel}
