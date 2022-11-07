@@ -14,6 +14,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { grey } from '@mui/material/colors';
 
 // Material UI properties for the form element
 const ITEM_HEIGHT = 48;
@@ -121,13 +122,13 @@ function MovieForm() {
               component="h1"
               variant="h4"
               align="center"
-              color="text.primary"
-              gutterBottom
+              color="#1565c0"
             >
               Add Movie
             </Typography>
             <div>
             <TextField
+            // sx={{backgroundColor:"#bef7e1", border: '1px solid grey'}}
             margin='dense'
             fullWidth
             required
@@ -165,7 +166,9 @@ function MovieForm() {
             multiple
             value={genreNames}
             onChange={handleGenreChange}
-            input={<OutlinedInput id="select-multiple-genres" label="Genres" />}
+            input={<OutlinedInput id="select-multiple-genres" 
+            // label="Genres" 
+            />}
             renderValue={(selected) => (
                 <Box sx={{ width: 250, display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                 {selected.map((value) => (

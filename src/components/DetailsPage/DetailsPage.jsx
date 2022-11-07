@@ -36,7 +36,7 @@ function DetailsPage() {
 
     return (
         <>
-        <Card sx={{ m: 1, maxwidth: 500 }} >
+        <Card sx={{ m: 1, maxwidth: 500, backgroundColor: "#bef7e1" }} >
             <CardHeader
             title={activeMovie && activeMovie.title}
             />
@@ -47,9 +47,12 @@ function DetailsPage() {
                 alt={activeMovie && activeMovie.title}
             />
             <CardContent>
-                <List>
+                <List
+                sx={{display:'flex'}}>
                     {activeMovie.genres && activeMovie.genres.map(x => 
-                    <ListItem key={x.genre}>{x.genre}</ListItem>
+                    <ListItem 
+                    sx={{justifyContent:'space-around'}}
+                    key={x.genre}>{x.genre}</ListItem>
                     )}
                 </List> 
                 <Typography variant="body2" color="text.secondary">
@@ -57,7 +60,8 @@ function DetailsPage() {
                 </Typography>
             </CardContent>
         </Card>
-        <Button variant="outlined" onClick={handleBack}>
+        <Button variant="outlined" onClick={handleBack} 
+            sx={{marginBottom:5}}>
             Back to Movies List
         </Button>
         </>

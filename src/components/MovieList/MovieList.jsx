@@ -46,19 +46,6 @@ function MovieList() {
 
         </ThemeProvider>
 
-            {/* <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title} 
-                            />
-                        </div>
-                    );
-                })}
-            </section> */}
-
         <main>
         <Container maxWidth="sm">
             <Typography
@@ -67,6 +54,7 @@ function MovieList() {
               align="center"
               color="text.primary"
               gutterBottom
+              marginTop="10px"
             >
               Movies List
             </Typography>
@@ -80,7 +68,9 @@ function MovieList() {
             {movies.map((movie) => (
               <Grid item key={movie.id} xs={12} sm={6} md={4}>
                 <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                  sx={{ height: '100%', display: 'flex', 
+                  flexDirection: 'column',
+                  backgroundColor: "#bef7e1" }}
                 >
                   <CardMedia
                     component="img"
@@ -89,14 +79,16 @@ function MovieList() {
                     onClick={(evt)=>goToDetails(evt, movie)} 
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h3">
+                    <Typography  variant="h5" component="h3">
                       {movie.title}
                     </Typography>
                     {/* <Typography>
                     </Typography> */}
                   </CardContent>
-                  <CardActions>
-                    <Button onClick={(evt)=>goToDetails(evt, movie)}>
+                  <CardActions 
+                  sx={{justifyContent:'center'}}>
+                    <Button 
+                    onClick={(evt)=>goToDetails(evt, movie)}>
                       Details
                     </Button>
                   </CardActions>
