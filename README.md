@@ -4,7 +4,7 @@ _Duration: 2 Day Sprint_
 
 ## Description
 
-This project focused on creating a responsive movie gallery website.
+This project focused on creating a responsive movie gallery website using React and Redux-Saga. In this project, an additional challenge was to add multiple genres for a movie using multi-select in a drop-down list, and store these genres in a database.
 
 The movie list will be shown on the main page. You can click on a movie to go to its details view - the details view will show the movie's genres and description.
 
@@ -27,7 +27,8 @@ Link to software that is required to install the app (e.g. node).
 ## Usage
 
 1. Scroll through the movie gallery and click on the movie to see the details.
-2. See the larger 
+2. In the details page, see the full size movie poster, list of movie's genres, and read the description.
+3. Add a movie by clicking 'ADD MOVIE' at the top of the page. You can select multiple genres from the drop-down list.
 
 ## Built With
 

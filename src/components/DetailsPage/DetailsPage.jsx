@@ -36,7 +36,7 @@ function DetailsPage() {
 
     return (
         <>
-        <Card sx={{ m: 1, maxwidth: 500, backgroundColor: "#bef7e1" }} >
+        <Card sx={{ m: 1, maxwidth: '50%', backgroundColor: "#bef7e1" }} >
             <CardHeader
             title={activeMovie && activeMovie.title}
             />
