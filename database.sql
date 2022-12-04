@@ -4,7 +4,7 @@
 CREATE TABLE "movies" (
   "id" SERIAL PRIMARY KEY,
   "title" VARCHAR(120) NOT NULL,
-  "poster"  VARCHAR(120) NOT NULL,
+  "poster"  VARCHAR(1200) NOT NULL,
   "description" TEXT NOT NULL
 );
 
@@ -98,3 +98,9 @@ FROM genres;
 
 SELECT *
 FROM movies;
+
+SELECT json_agg("genres") AS genres FROM "movies"
+LEFT JOIN "movies_genres" ON "movies_genres".movie_id = "movies".id
+LEFT JOIN "genres" ON "genres".id = "movies_genres".genre_id
+WHERE "movies".id = 2
+GROUP BY "movies".id;

@@ -36,5 +36,5 @@ Link to software that is required to install the app (e.g. node).
 - Redux 
 - Redux-Saga
 - Node.js
-- Postgres
+- PostgreSQL
 - Material-UI
