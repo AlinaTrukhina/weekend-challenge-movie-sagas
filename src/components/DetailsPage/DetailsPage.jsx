@@ -36,12 +36,12 @@ function DetailsPage() {
 
     return (
         <>
-        <Card sx={{ m: 1, maxwidth: '50%', backgroundColor: "#bef7e1" }} >
+        <Card sx={{ m: 2, maxwidth: '50%', maxHeight: '80%', backgroundColor: "#bef7e1" }} >
             <CardHeader
             title={activeMovie && activeMovie.title}
             />
             <CardMedia
-                sx={{height: '50%', width: '50%', margin: 'auto' }}
+                sx={{height: '50%', width: '50%', margin: 'auto', maxWidth: '400px' }}
                 component="img"               
                 image={activeMovie && activeMovie.poster}
                 alt={activeMovie && activeMovie.title}

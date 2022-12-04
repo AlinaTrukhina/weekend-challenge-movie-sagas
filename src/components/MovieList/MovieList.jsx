@@ -44,9 +44,9 @@ function MovieList() {
               gutterBottom
               marginTop="10px"
             >
-              Movies List
+              Movie Night Selections
             </Typography>
-          <Button onClick={handleCreateMovie}>
+          <Button onClick={handleCreateMovie} variant="contained">
             Add Movie
           </Button>
         </Container>
